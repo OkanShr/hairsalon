@@ -72,7 +72,7 @@ class Items extends StatelessWidget {
             height: 0,
             thickness: 5,
           ),
-          ItemCard()
+          const ItemCard()
         ],
       ),
     );

@@ -21,12 +21,12 @@ class Usercard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 240,
                         height: 50,
                         child: Text(
-                          "      Musteri Adi",
-                          style: TextStyle(
+                          '',
+                          style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
                       ),

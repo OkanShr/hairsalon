@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hairsalon/components/customappbar.dart';
 import 'package:hairsalon/components/customerform.dart';
 
-import '../db/sql_helper.dart';
+class CustomerDetail extends StatefulWidget {
+  const CustomerDetail({Key? key}) : super(key: key);
 
-class AddCustomer extends StatefulWidget {
-  const AddCustomer({Key? key, this.id}) : super(key: key);
-  final int? id;
   @override
-  State<AddCustomer> createState() => _AddCustomerState();
+  State<CustomerDetail> createState() => _CustomerDetailState();
 }
 
-class _AddCustomerState extends State<AddCustomer> {
+class _CustomerDetailState extends State<CustomerDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Customappbar(appbartitle: "Müşteri Ekle"),
+      appBar: Customappbar(appbartitle: "Müşteri Adi"),
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,7 +24,6 @@ class _AddCustomerState extends State<AddCustomer> {
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
           ),
-          FormWidget()
         ],
       ),
     );

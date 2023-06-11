@@ -34,7 +34,7 @@ class _DatepickerState extends State<Datepicker> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     formatted ?? '0000-00-00',
                     style: const TextStyle(fontSize: 17),

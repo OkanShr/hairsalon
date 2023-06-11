@@ -26,27 +26,6 @@ class Home extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
-                CustomPageRoute(child: const AddCustomer()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(200, 50),
-              backgroundColor: Colors.black,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.only(
-                  left: 35, right: 35, top: 15, bottom: 15),
-            ),
-            child: const Text(
-              'Müşteri Ekle',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
                 CustomPageRoute(child: const Customers()),
               );
             },

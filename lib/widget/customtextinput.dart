@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
+typedef void StringCallback(String val);
+
 // ignore: must_be_immutable
 class CustomTextInput extends StatelessWidget {
   String inputtitle;
   String inputhint;
   int inputlines;
+  final StringCallback callback;
+
   CustomTextInput(
       {super.key,
       required this.inputtitle,
       required this.inputlines,
-      required this.inputhint});
+      required this.inputhint,
+      required this.callback});
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +50,9 @@ class CustomTextInput extends StatelessWidget {
                   return "Bir $inputtitle Girin";
                 }
                 return null;
+              },
+              onChanged: (text) {
+                callback(text);
               },
             ),
           ),

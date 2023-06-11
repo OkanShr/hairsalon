@@ -13,26 +13,26 @@ class ItemForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomTextInput(
-            inputtitle: "Isim Soyisim",
-            inputhint: 'Isim Soyisim',
-            inputlines: 1,
-          ),
-          CustomTextInput(
-            inputtitle: "Saç Rengi",
-            inputhint: 'Renk',
-            inputlines: 1,
-          ),
-          CustomTextInput(
-            inputtitle: "Tel Numara",
-            inputhint: '69...',
-            inputlines: 1,
-          ),
-          CustomTextInput(
-            inputtitle: "Not",
-            inputhint: 'Not',
-            inputlines: 4,
-          ),
+          // CustomTextInput(
+          //   inputtitle: "Isim Soyisim",
+          //   inputhint: 'Isim Soyisim',
+          //   inputlines: 1,
+          // ),
+          // CustomTextInput(
+          //   inputtitle: "Saç Rengi",
+          //   inputhint: 'Renk',
+          //   inputlines: 1,
+          // ),
+          // CustomTextInput(
+          //   inputtitle: "Tel Numara",
+          //   inputhint: '69...',
+          //   inputlines: 1,
+          // ),
+          // CustomTextInput(
+          //   inputtitle: "Not",
+          //   inputhint: 'Not',
+          //   inputlines: 4,
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hairsalon/db/sql_helper.dart';
 import 'package:hairsalon/widget/customtextinput.dart';
 import 'package:hairsalon/widget/datepicker.dart';
 import 'package:hairsalon/widget/genderselect.dart';
@@ -6,9 +7,23 @@ import 'package:hairsalon/widget/multiselectdropdown.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class FormWidget extends StatelessWidget {
+class FormWidget extends StatefulWidget {
   const FormWidget({Key? key}) : super(key: key);
 
+  @override
+  State<FormWidget> createState() => new _FormWidgetState();
+
+  static _FormWidgetState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_FormWidgetState>();
+}
+
+class _FormWidgetState extends State<FormWidget> {
+  String _customernameController = '';
+  String _haircolorController = '';
+
+  set customername(String value) =>
+      setState(() => _customernameController = value);
+  set haircolor(String value) => setState(() => _haircolorController = value);
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,6 +34,7 @@ class FormWidget extends StatelessWidget {
           Row(
             children: [
               CustomTextInput(
+                callback: (val) => setState(() => customername = val),
                 inputtitle: "Isim Soyisim",
                 inputhint: 'Isim Soyisim',
                 inputlines: 1,
@@ -30,40 +46,41 @@ class FormWidget extends StatelessWidget {
             children: [
               const Genderselect(),
               CustomTextInput(
+                callback: (val) => setState(() => haircolor = val),
                 inputtitle: "Saç Rengi",
                 inputhint: 'Renk',
                 inputlines: 1,
               ),
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomTextInput(
-                inputtitle: "Tel Numara",
-                inputhint: '69...',
-                inputlines: 1,
-              ),
-              CustomTextInput(
-                inputtitle: "Not",
-                inputhint: 'Not',
-                inputlines: 4,
-              ),
-            ],
-          ),
-          const Divider(
-            height: 40,
-            thickness: 5,
-            color: Colors.black,
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 40, top: 10, bottom: 10),
-            child: Text(
-              'Alerji Bilgileri',
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const Multiselectdropdown(),
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     CustomTextInput(
+          //       inputtitle: "Tel Numara",
+          //       inputhint: '69...',
+          //       inputlines: 1,
+          //     ),
+          //     CustomTextInput(
+          //       inputtitle: "Not",
+          //       inputhint: 'Not',
+          //       inputlines: 4,
+          //     ),
+          //   ],
+          // ),
+          // const Divider(
+          //   height: 40,
+          //   thickness: 5,
+          //   color: Colors.black,
+          // ),
+          // const Padding(
+          //   padding: EdgeInsets.only(left: 40, top: 10, bottom: 10),
+          //   child: Text(
+          //     'Alerji Bilgileri',
+          //     style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const Multiselectdropdown(),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -83,8 +100,11 @@ class FormWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 35, right: 35, top: 15, bottom: 15),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      print(
+                          "Name: $_customernameController , Hair Color: $_haircolorController");
+                      await _addCustomer();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text("Müşteri Eklendi"),
@@ -103,5 +123,10 @@ class FormWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _addCustomer() async {
+    await SQLHelper.createCustomer(
+        _customernameController, _haircolorController);
   }
 }
