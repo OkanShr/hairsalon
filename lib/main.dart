@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hairsalon/pages/additem.dart';
 import 'package:hairsalon/pages/customers.dart';
+import 'package:hairsalon/pages/editcustomer.dart';
 import 'package:hairsalon/pages/home.dart';
 import 'package:hairsalon/pages/addcustomer.dart';
 import 'package:hairsalon/pages/items.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:hairsalon/route/routegenerator.dart';
 
-Future main() async {
-  databaseFactory = databaseFactoryFfi;
+void main() {
+  runApp(const MyApp());
+}
 
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {
-      '/': (context) => Home(),
-      '/addcustomer': (context) => AddCustomer(),
-      '/customers': (context) => Customers(),
-      '/items': (context) => Items(),
-      '/additem': (context) => Additem()
-    },
-  ));
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        title: 'Hair Salon',
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute);
+  }
 }

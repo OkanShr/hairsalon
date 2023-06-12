@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hairsalon/widget/customtextinput.dart';
 
 final _formKey = GlobalKey<FormState>();
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hairsalon/components/customappbar.dart';
-import 'package:hairsalon/components/customerform.dart';
 
 class CustomerDetail extends StatefulWidget {
   const CustomerDetail({Key? key}) : super(key: key);

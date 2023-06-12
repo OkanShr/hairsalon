@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:hairsalon/widget/custompageroute.dart';
-
-import 'package:hairsalon/pages/addcustomer.dart';
 import 'package:hairsalon/pages/customers.dart';
 import 'package:hairsalon/pages/items.dart';
 
@@ -25,9 +22,7 @@ class Home extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                CustomPageRoute(child: const Customers()),
-              );
+              Navigator.pushNamed(context, '/customers');
             },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(200, 50),
@@ -43,9 +38,7 @@ class Home extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                CustomPageRoute(child: const Items()),
-              );
+              Navigator.pushNamed(context, '/items');
             },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(200, 50),

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-typedef void StringCallback(String val);
+typedef StringCallback = void Function(String val);
 
 // ignore: must_be_immutable
 class CustomTextInput extends StatelessWidget {
   String inputtitle;
   String inputhint;
   int inputlines;
-  final StringCallback callback;
+  final TextEditingController controller;
 
   CustomTextInput(
       {super.key,
       required this.inputtitle,
       required this.inputlines,
       required this.inputhint,
-      required this.callback});
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class CustomTextInput extends StatelessWidget {
           SizedBox(
             width: 200,
             child: TextFormField(
+              controller: controller,
               maxLines: inputlines,
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
@@ -50,9 +51,6 @@ class CustomTextInput extends StatelessWidget {
                   return "Bir $inputtitle Girin";
                 }
                 return null;
-              },
-              onChanged: (text) {
-                callback(text);
               },
             ),
           ),

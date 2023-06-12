@@ -6,6 +6,7 @@ class Additem extends StatefulWidget {
   const Additem({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AdditemState createState() => _AdditemState();
 }
 

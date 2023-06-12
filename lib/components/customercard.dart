@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Usercard extends StatelessWidget {
-  const Usercard({Key? key}) : super(key: key);
+  const Usercard(
+      {Key? key,
+      required this.id,
+      required this.customername,
+      required this.haircolor})
+      : super(key: key);
+  final int id;
+  final String customername;
+  final String haircolor;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class Usercard extends StatelessWidget {
                         width: 240,
                         height: 50,
                         child: Text(
-                          '',
+                          customername,
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -43,7 +51,7 @@ class Usercard extends StatelessWidget {
                                 left: 35, right: 35, top: 15, bottom: 15),
                           ),
                           child: const Text(
-                            'Müşteri Ekle',
+                            'Müşteriyi Sil',
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -60,7 +68,10 @@ class Usercard extends StatelessWidget {
                         width: 240,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/editcustomer',
+                                arguments: id);
+                          },
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(200, 50),
                             backgroundColor: Colors.black,
@@ -69,7 +80,7 @@ class Usercard extends StatelessWidget {
                                 left: 35, right: 35, top: 15, bottom: 15),
                           ),
                           child: const Text(
-                            'Müşteri Bilgileri',
+                            'Müşteri Edit',
                             style: TextStyle(fontSize: 20),
                           ),
                         ),

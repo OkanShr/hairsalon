@@ -19,7 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: '>=3.0.2 <4.0.0'
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -37,10 +38,11 @@ dependencies:
   easy_search_bar: ^2.5.0
   sqflite: ^2.2.8+4
   intl: ^0.18.1
-  sqflite_common_ffi: ^2.2.5
+  drift: ^2.8.2
+  sqlite3_flutter_libs: ^0.5.0
+  path_provider: ^2.0.0
   path: ^1.8.3
-  moor: ^2.4.1
-  moor_ffi: ^0.6.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,6 +53,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  drift_dev: ^2.8.3
+  build_runner: ^2.4.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

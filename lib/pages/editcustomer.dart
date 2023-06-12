@@ -11,14 +11,16 @@ import 'customers.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class AddCustomer extends StatefulWidget {
-  const AddCustomer({Key? key}) : super(key: key);
+class EditCustomer extends StatefulWidget {
+  const EditCustomer({Key? key, required this.id}) : super(key: key);
+  final int id;
   @override
-  State<AddCustomer> createState() => _AddCustomerState();
+  State<EditCustomer> createState() => _EditCustomerState();
 }
 
-class _AddCustomerState extends State<AddCustomer> {
+class _EditCustomerState extends State<EditCustomer> {
   late AppDb _db;
+  late CustomerData _customerData;
   // ignore: non_constant_identifier_names
   final TextEditingController _Namecontroller = TextEditingController();
   // ignore: non_constant_identifier_names
@@ -29,6 +31,7 @@ class _AddCustomerState extends State<AddCustomer> {
     super.initState();
 
     _db = AppDb();
+    getCustomer();
   }
 
   @override
@@ -42,7 +45,7 @@ class _AddCustomerState extends State<AddCustomer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Customappbar(appbartitle: "Müşteri Ekle"),
+      appBar: Customappbar(appbartitle: "Müşteri Edit"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -133,7 +136,7 @@ class _AddCustomerState extends State<AddCustomer> {
                               customerName: drift.Value(_Namecontroller.text),
                               hairColor: drift.Value(_Namecontroller.text),
                             );
-                            _db.insertCustomer(entity).then((value) =>
+                            _db.updateCustomer(entity).then((value) =>
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text("Müşteri Eklendi"),
@@ -159,5 +162,11 @@ class _AddCustomerState extends State<AddCustomer> {
         ],
       ),
     );
+  }
+
+  Future<void> getCustomer() async {
+    _customerData = await _db.getCustomer(widget.id);
+    _Namecontroller.text = _customerData.customerName;
+    _HairColorcontroller.text = _customerData.hairColor;
   }
 }

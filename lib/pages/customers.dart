@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hairsalon/components/customappbar.dart';
 import 'package:hairsalon/components/customersearchbar.dart';
 import 'package:hairsalon/components/customercard.dart';
-import 'package:hairsalon/db/sql_helper.dart';
+import 'package:hairsalon/db/app_db.dart';
 import 'package:hairsalon/pages/addcustomer.dart';
 
 import '../widget/custompageroute.dart';
@@ -15,24 +15,18 @@ class Customers extends StatefulWidget {
 }
 
 class _CustomersState extends State<Customers> {
-  List<Map<String, dynamic>> _customers = [];
-
-  bool _isLoading = true;
-
-  void _refreshCustomers() async {
-    final data = await SQLHelper.getCustomers();
-    setState(() {
-      _customers = data;
-      _isLoading = false;
-    });
-  }
-
+  late AppDb _db;
   @override
   void initState() {
     super.initState();
-    SQLHelper.db();
-    _refreshCustomers();
-    print("number of customers ${_customers.length}");
+
+    _db = AppDb();
+  }
+
+  @override
+  void dispose() {
+    _db.close();
+    super.dispose();
   }
 
   @override
@@ -98,6 +92,40 @@ class _CustomersState extends State<Customers> {
             color: Colors.black,
             height: 0,
             thickness: 5,
+          ),
+          FutureBuilder<List<CustomerData>>(
+            future: _db.getCustomers(),
+            builder: (context, snapshot) {
+              final List<CustomerData>? customers = snapshot.data;
+
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              }
+
+              if (customers != null) {
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: customers.length,
+                      itemBuilder: (context, index) {
+                        final customer = customers[index];
+                        return Usercard(
+                          customername: customer.customerName.toString(),
+                          haircolor: customer.hairColor.toString(),
+                          id: customer.id,
+                        );
+                      }),
+                );
+              }
+              return const Text("No Data Found");
+            },
           ),
           // Usercard()
         ],
